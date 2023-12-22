@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Inventario.TI.BackEnd.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-
     public class UsuarioController : WebControllerBase
     {
         private readonly IUsuarioService _usuarioService;
@@ -37,8 +35,8 @@ namespace Inventario.TI.BackEnd.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<Usuario>>> Consultar()
         {
-            var teste = GetLoginExterno();
-            var teste2 = IsInRole("Adminaaa");
+            //var teste = GetLoginExterno();
+            //var teste2 = IsInRole("Adminaaa");
             var retorno = await _usuarioService.Get();
             return Ok(retorno);
         }

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Inventario.TI.Core.Seguranca
+﻿namespace Inventario.TI.Core.Seguranca
 {
-    public class ClaimExtensionscs
+    public static class ClaimExtensionscs
     {
-        public const string CLAIM_SUB = "teste";
+        public const string CLAIM_SUB = "login";
         public const string CLAIM_ROLE = "role";
+        public const string CLAIM_EMPRESA = "empresa";
     }
 }

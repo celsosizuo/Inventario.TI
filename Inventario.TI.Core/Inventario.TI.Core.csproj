@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EnterpriseLibrary.Common" Version="5.0.505" />
     <PackageReference Include="EnterpriseLibrary.Security.Cryptography" Version="5.0.505" />
+    <PackageReference Include="Unity" Version="2.1.505" />
+    <PackageReference Include="Unity.Interception" Version="2.1.505" />
   </ItemGroup>
 
 </Project>
