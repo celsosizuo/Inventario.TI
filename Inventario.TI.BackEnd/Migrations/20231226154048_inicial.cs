@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Inventario.TI.BackEnd.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,11 +34,33 @@ namespace Inventario.TI.BackEnd.Migrations
                     Estado = table.Column<string>(type: "varchar(2)", maxLength: 2, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Cep = table.Column<string>(type: "varchar(8)", maxLength: 8, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DataCriacao = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    IdUsuarioCriacao = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Enderecos", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "TokenNumerico",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Token = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    NumeroTentativas = table.Column<int>(type: "int", nullable: false),
+                    Utilizado = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    IdObjeto = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    DataCriacao = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    IdUsuarioCriacao = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TokenNumerico", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -52,8 +74,12 @@ namespace Inventario.TI.BackEnd.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Cnpj = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Ativo = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
                     IdEndereco = table.Column<int>(type: "int", nullable: false),
-                    EnderecoId = table.Column<long>(type: "bigint", nullable: true)
+                    EnderecoId = table.Column<long>(type: "bigint", nullable: true),
+                    IdExterno = table.Column<Guid>(type: "char(36)", nullable: false, defaultValue: new Guid("a8357583-9988-4943-be83-9bc7db4dcbe4"), collation: "ascii_general_ci"),
+                    DataCriacao = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    IdUsuarioCriacao = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,8 +106,9 @@ namespace Inventario.TI.BackEnd.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Role = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Ativo = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
                     IdEmpresa = table.Column<long>(type: "bigint", nullable: false),
-                    IdExterno = table.Column<Guid>(type: "char(36)", nullable: false, defaultValue: new Guid("00000000-0000-0000-0000-000000000000"), collation: "ascii_general_ci"),
+                    IdExterno = table.Column<Guid>(type: "char(36)", nullable: false, defaultValue: new Guid("7ca08c48-0ab4-440d-b529-54cc1c210a2c"), collation: "ascii_general_ci"),
                     DataCriacao = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     IdUsuarioCriacao = table.Column<long>(type: "bigint", nullable: false)
                 },
@@ -111,6 +138,9 @@ namespace Inventario.TI.BackEnd.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "TokenNumerico");
+
             migrationBuilder.DropTable(
                 name: "Usuarios");
 

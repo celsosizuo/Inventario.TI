@@ -33,5 +33,9 @@ namespace Inventario.TI.BackEnd.Services
         {
             return await _empresaRepository.GetByIdExterno(idExterno);
         }
+        public async Task<bool> Ativar(Guid idExterno)
+        {
+            return await _empresaRepository.Ativar(idExterno);
+        }
     }
 }

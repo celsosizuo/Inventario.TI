@@ -1,6 +1,7 @@
 ﻿using Inventario.TI.BackEnd.Entities;
 using Inventario.TI.BackEnd.Interfaces.Empresas;
 using Inventario.TI.BackEnd.Repositories.Context;
+using Inventario.TI.Core.Exceptions.Empresa;
 using Microsoft.EntityFrameworkCore;
 
 namespace Inventario.TI.BackEnd.Repositories
@@ -17,7 +18,7 @@ namespace Inventario.TI.BackEnd.Repositories
         public async Task<Empresa> Inserir(Empresa empresa)
         {
             var retorno = await _context.Empresas.AddAsync(empresa);
-            _context.SaveChanges();
+            _context.SaveChanges(); 
             return retorno.Entity;
         }
         public async Task<bool> Alterar(Empresa empresa)
@@ -39,6 +40,15 @@ namespace Inventario.TI.BackEnd.Repositories
         {
             var retorno = await Task.Run(() => _context.Empresas.Where(x => x.IdExterno == idExterno).FirstOrDefault());
             return retorno;
+        }
+        public async Task<bool> Ativar(Guid idExterno)
+        {
+            var empresa = await _context.Empresas.FirstOrDefaultAsync(x => x.IdExterno == idExterno) ?? throw new EmpresaNaoEncontradaException();
+
+            empresa.Ativo = true;
+            _context.SaveChanges();
+
+            return true;
         }
     }
 }

@@ -18,9 +18,19 @@ namespace Inventario.TI.BackEnd.Mappings
                 .HasMaxLength(200)
                 .IsRequired();
 
-            
+            builder.Property(x => x.Ativo)
+                .IsRequired()
+                .HasDefaultValue(false);
 
+            builder.Property(x => x.IdExterno)
+                .IsRequired()
+                .HasDefaultValue(Guid.NewGuid());
 
+            builder.Property(x => x.DataCriacao)
+                .IsRequired();
+
+            builder.Property(x => x.IdUsuarioCriacao)
+                .IsRequired();
         }
     }
 }

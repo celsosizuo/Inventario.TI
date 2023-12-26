@@ -3,6 +3,7 @@ using System;
 using Inventario.TI.BackEnd.Repositories.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inventario.TI.BackEnd.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231226154048_inicial")]
+    partial class inicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +52,7 @@ namespace Inventario.TI.BackEnd.Migrations
                     b.Property<Guid>("IdExterno")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)")
-                        .HasDefaultValue(new Guid("4f4291e4-e929-4312-86d8-064249d7d5e8"));
+                        .HasDefaultValue(new Guid("a8357583-9988-4943-be83-9bc7db4dcbe4"));
 
                     b.Property<long>("IdUsuarioCriacao")
                         .HasColumnType("bigint");
@@ -111,49 +114,6 @@ namespace Inventario.TI.BackEnd.Migrations
                     b.ToTable("Enderecos");
                 });
 
-            modelBuilder.Entity("Inventario.TI.BackEnd.Entities.FilaEMail", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Assunto")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
-
-                    b.Property<DateTime>("DataCriacao")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("DataEnvio")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Destinatario")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<long>("IdEmpresa")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("IdUsuarioCriacao")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Mensagem")
-                        .IsRequired()
-                        .HasMaxLength(8000)
-                        .HasColumnType("varchar(8000)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdEmpresa");
-
-                    b.ToTable("FilaEmails");
-                });
-
             modelBuilder.Entity("Inventario.TI.BackEnd.Entities.TokenNumerico", b =>
                 {
                     b.Property<long>("Id")
@@ -204,7 +164,7 @@ namespace Inventario.TI.BackEnd.Migrations
                     b.Property<Guid>("IdExterno")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)")
-                        .HasDefaultValue(new Guid("82a53fee-2088-4b94-a7cc-934cde30eb45"));
+                        .HasDefaultValue(new Guid("7ca08c48-0ab4-440d-b529-54cc1c210a2c"));
 
                     b.Property<long>("IdUsuarioCriacao")
                         .HasColumnType("bigint");
@@ -244,17 +204,6 @@ namespace Inventario.TI.BackEnd.Migrations
                     b.Navigation("Endereco");
                 });
 
-            modelBuilder.Entity("Inventario.TI.BackEnd.Entities.FilaEMail", b =>
-                {
-                    b.HasOne("Inventario.TI.BackEnd.Entities.Empresa", "Empresa")
-                        .WithMany("FilaEmails")
-                        .HasForeignKey("IdEmpresa")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Empresa");
-                });
-
             modelBuilder.Entity("Inventario.TI.BackEnd.Entities.Usuario", b =>
                 {
                     b.HasOne("Inventario.TI.BackEnd.Entities.Empresa", "Empresa")
@@ -268,8 +217,6 @@ namespace Inventario.TI.BackEnd.Migrations
 
             modelBuilder.Entity("Inventario.TI.BackEnd.Entities.Empresa", b =>
                 {
-                    b.Navigation("FilaEmails");
-
                     b.Navigation("Usuarios");
                 });
 #pragma warning restore 612, 618

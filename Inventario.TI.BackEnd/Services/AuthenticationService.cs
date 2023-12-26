@@ -2,10 +2,10 @@
 using Inventario.TI.BackEnd.Interfaces.Authentication;
 using Inventario.TI.BackEnd.Interfaces.Usuarios;
 using Inventario.TI.BackEnd.Models;
+using Inventario.TI.Core.Exceptions.Usuario;
 using Inventario.TI.Core.Seguranca;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using System.Text;
 
 namespace Inventario.TI.BackEnd.Services
@@ -25,10 +25,19 @@ namespace Inventario.TI.BackEnd.Services
         public async Task<string> Authenticate(LoginModel login)
         {
             var usuario = await BuscarUsuarioPorLogin(login.Usuario);
-            await ValidarSenha(login.Senha, usuario?.Senha ?? throw new ArgumentException("Usuário ou senha inválidos"));
-            var token = GerarToken(usuario);
 
-            return token;
+            if (usuario != null)
+            {
+                if (!usuario.Ativo)
+                    throw new UsuarioInativoException();
+
+                await ValidarSenha(login.Senha, usuario.Senha ?? throw new UsuarioNaoEncontradoException());
+                var token = GerarToken(usuario);
+
+                return token;
+            }
+            else
+                throw new UsuarioNaoEncontradoException();
         }
         private async Task<Usuario?> BuscarUsuarioPorLogin(string login)
         {

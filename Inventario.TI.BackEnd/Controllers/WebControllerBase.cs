@@ -1,14 +1,11 @@
-﻿using Inventario.TI.BackEnd.Interfaces.Usuarios;
-using Inventario.TI.Core.Seguranca;
-using Microsoft.AspNetCore.Authorization;
+﻿using Inventario.TI.Core.Seguranca;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 namespace Inventario.TI.BackEnd.Controllers
 {
     [ApiController]
-    [Route("api/{dominio}/[controller]")]
+    //[Route("api/{dominio}/[controller]")]
+    [Route("api/[controller]")]
     //[Authorize("Bearer")]
     public abstract class WebControllerBase : ControllerBase
     {

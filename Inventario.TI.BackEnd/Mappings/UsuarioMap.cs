@@ -13,7 +13,7 @@ namespace Inventario.TI.BackEnd.Mappings
 
             builder.Property(x => x.IdExterno)
                 .IsRequired()
-                .HasDefaultValue(new Guid());
+                .HasDefaultValue(Guid.NewGuid());
 
             builder.Property(x => x.Nome)
                 .IsRequired()
@@ -28,6 +28,10 @@ namespace Inventario.TI.BackEnd.Mappings
                 .HasMaxLength(200);
 
             builder.Property(x => x.Role)
+                .IsRequired();
+
+            builder.Property(x => x.Ativo)
+                .HasDefaultValue(false)
                 .IsRequired();
 
             builder.Property(x => x.DataCriacao)

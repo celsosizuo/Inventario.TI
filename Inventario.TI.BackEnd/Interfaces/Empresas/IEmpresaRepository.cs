@@ -9,5 +9,6 @@ namespace Inventario.TI.BackEnd.Interfaces.Empresas
         Task<Empresa?> FindById(long id);
         Task<IEnumerable<Empresa>> Get();
         Task<Empresa?> GetByIdExterno(Guid idExterno);
+        Task<bool> Ativar(Guid idExterno);
     }
 }

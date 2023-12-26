@@ -28,6 +28,12 @@ namespace Inventario.TI.BackEnd.Mappings
 
             builder.Property(x => x.Cep)
                 .HasMaxLength(8);
+
+            builder.Property(x => x.DataCriacao)
+                .IsRequired();
+
+            builder.Property(x => x.IdUsuarioCriacao)
+                .IsRequired();
         }
     }
 }
