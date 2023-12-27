@@ -71,7 +71,7 @@ builder.Services.AddCors(options =>
     );
 });
 
-var connection = builder.Configuration.GetConnectionString("Mysql") ?? throw new Exception("Conexão com o banco de dados não encontrada!");
+var connection = builder.Configuration.GetConnectionString("Mysql") ?? throw new ArgumentException("Conexão com o banco de dados não encontrada!");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
 
 builder.Services.ConfigureServices(builder.Configuration);
