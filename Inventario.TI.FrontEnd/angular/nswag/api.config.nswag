@@ -63,7 +63,7 @@
       "enumNameGeneratorType": null,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": "../src/shared/api/api-saude-hub-proxy.ts"
+      "output": "../src/shared/api/api-inventario-ti-proxy.ts"
     }
   }
 }
