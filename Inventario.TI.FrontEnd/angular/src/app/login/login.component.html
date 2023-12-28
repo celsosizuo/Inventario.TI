@@ -1,31 +1,39 @@
 <div class="container">
     <div class="row justify-content-center login-container">
         <div class="col-md-6 col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Login</h5>
-                    <!-- Div para simular o formulário de login -->
+            <p-card header="Login - Inventário TI">
+                <div class="m-0">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="username">Usuário:</label>
-                                <input type="text" class="form-control" id="username" placeholder="Digite seu usuário">
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="password">Senha:</label>
-                                <input type="password" class="form-control" id="password" placeholder="Digite sua senha">
-                            </div>
+                        <div class="col-lg-12" style="padding-bottom: 10px;">
+                            <p-inputGroup class="pb-10">
+                                <p-inputGroupAddon>
+                                    <i class="pi pi-user"></i>
+                                </p-inputGroupAddon>
+                                <input pInputText placeholder="Usuário" [(ngModel)]="loginModel.usuario" />
+                            </p-inputGroup>
                         </div>
                     </div>
-                    <div class="row pt-2">
+                    <div class="row">
                         <div class="col-lg-12">
-                            <button class="btn btn-primary">Entrar</button>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class="pi pi-lock"></i>
+                                </p-inputGroupAddon>
+                                <input type="password" pInputText placeholder="Senha" [(ngModel)]="loginModel.senha"/>
+                            </p-inputGroup>                            
+                        </div>
+                    </div>
+                    <div class="row pt-3">
+                        <div class="col-lg-8 col-md-6 col-sm-12 text-start p-0">
+                            <a class="btn btn-link">Esqueceu sua senha?</a>
+                        </div>
+                        <div class="col-4 col-md-2 col-sm-12 text-end">
+                            <button type="button" pButton pRipple class="p-button-primary" (click)="efetuarLogin()">Acessar</button>
                         </div>
                     </div>
                 </div>
-            </div>
+            </p-card>
         </div>
     </div>
 </div>
+<p-toast></p-toast>

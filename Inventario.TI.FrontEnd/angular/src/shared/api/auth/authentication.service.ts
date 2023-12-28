@@ -14,9 +14,7 @@ export class AuthenticationService {
 
 
     static getJwtFullHeaders(contentHeaders: any): HttpHeaders {
-
         contentHeaders = '';
-
         return new HttpHeaders({
             'Content-Type': 'application/json',
             Accept: 'application/json',
