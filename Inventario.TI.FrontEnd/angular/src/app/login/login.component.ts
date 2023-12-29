@@ -1,7 +1,8 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit, inject } from '@angular/core';
 import { AutenticacaoServiceProxy, LoginModel } from '../../shared/api/api-inventario-ti-proxy';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { TipoMensagem } from '../toast/enumtipomensagem';
+import { AppBaseComponent } from '../../shared/app-base-component';
 
 @Component({
   selector: 'app-login',
@@ -9,34 +10,39 @@ import { TipoMensagem } from '../toast/enumtipomensagem';
   styleUrl: './login.component.scss',
   providers: [MessageService],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends AppBaseComponent implements OnInit {
   private autenticacaoService: AutenticacaoServiceProxy;
   loginModel: LoginModel;
   usuario: string = '';
   senha: string = '';
 
-  constructor(injector: Injector, private messageService: MessageService, private primengConfig: PrimeNGConfig) {
-    this.loginModel = new LoginModel();
+  constructor(injector: Injector) {
+    super(injector);
+
+    // this.toastService = injector.get(ToastService);
     this.autenticacaoService = injector.get(AutenticacaoServiceProxy);
+    this.loginModel = new LoginModel();
   }
  
   ngOnInit() {
-    this.primengConfig.ripple = true;
+    // this.primengConfig.ripple = true;
   }
 
   efetuarLogin() {
+    this.startLoading();
     if(!this.validarCampos()) {
       return;
     }
     
     this.autenticacaoService.autenticar(this.loginModel).subscribe(result => {
+      this.stopLoading();
       if(result) {
         console.log('result', result);
       } else {
         console.log('não result');
       }
     }, (error) => {
-      this.showMessage(TipoMensagem.Erro, 'Erro na API', error);
+      this.verifyError(error);
     })
   }
 
@@ -52,9 +58,5 @@ export class LoginComponent implements OnInit {
     }
 
     return true;
-  }
-
-  showMessage(tipo: string, titulo: string, mensagem: string) {
-    this.messageService.add({severity:tipo, summary:titulo, detail: mensagem});
   }
 }

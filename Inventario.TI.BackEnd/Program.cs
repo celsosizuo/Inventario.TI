@@ -1,4 +1,5 @@
 using Inventario.TI.BackEnd;
+using Inventario.TI.BackEnd.Middleware;
 using Inventario.TI.BackEnd.Repositories.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -79,7 +80,6 @@ builder.Services.ConfigureServices(builder.Configuration);
 var app = builder.Build();
 app.UseCors("CorsPolicy");
 
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -96,5 +96,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
 app.Run();

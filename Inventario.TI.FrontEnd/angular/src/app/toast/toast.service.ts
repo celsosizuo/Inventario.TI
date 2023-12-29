@@ -5,9 +5,8 @@ import { MessageService, PrimeNGConfig } from 'primeng/api';
   providedIn: 'root'
 })
 export class ToastService {
-
   constructor(private messageService: MessageService, private primengConfig: PrimeNGConfig){
-    this.primengConfig.ripple = true;
+    // this.primengConfig.ripple = true;
    }
 
   showSuccess(message: string) {

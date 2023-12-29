@@ -51,4 +51,22 @@ export class AuthenticationService {
     static setCulture(culture: string) {
         Store.setItem(AuthenticationService.STORAGE_KEY_CURRENT_LANGUAGE, culture);
     }
+
+    getLanguageResource(): any {
+        const resource = Store.getItem(AuthenticationService.STORAGE_KEY_LANGUAGE);
+        if (resource) {
+            return JSON.parse(resource);
+        }
+        return null;
+    }
+
+    static signOut(redirect: boolean = true) {
+        Store.removeItem(AuthenticationService.STORAGE_KEY_USER);
+        // AuthenticationService.loggedObservable.emit(false);
+        // if (redirect) {
+        //     AuthenticationService.removeLanguageResource();
+        //     this.removeSessionKeys();
+        //     AuthenticationService.reload();
+        // }
+    }
 }

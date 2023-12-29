@@ -2,6 +2,7 @@
 using Inventario.TI.BackEnd.Interfaces.Authentication;
 using Inventario.TI.BackEnd.Interfaces.Usuarios;
 using Inventario.TI.BackEnd.Models;
+using Inventario.TI.Core.Exceptions;
 using Inventario.TI.Core.Exceptions.Usuario;
 using Inventario.TI.Core.Seguranca;
 using Microsoft.IdentityModel.Tokens;
@@ -41,12 +42,12 @@ namespace Inventario.TI.BackEnd.Services
         }
         private async Task<Usuario?> BuscarUsuarioPorLogin(string login)
         {
-            return await _usuarioService.GetByLogin(login) ?? throw new ArgumentException("Login/Senha inválidos");
+            return await _usuarioService.GetByLogin(login) ?? throw new BusinessException("Login/Senha inválidos");
         }
         private async Task ValidarSenha(string senhaDigitada, string senhaArmazanada)
         {
             if (!await _pwdHasher.VerifyHashAsync(senhaDigitada, senhaArmazanada))
-                throw new ArgumentException("Usuário ou senha inválidos");
+                throw new BusinessException("Usuário ou senha inválidos");
         }
         private string GerarToken(Usuario usuario)
         {

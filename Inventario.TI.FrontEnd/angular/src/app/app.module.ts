@@ -20,11 +20,20 @@ import { CardModule } from 'primeng/card';
 import { API_BASE_URL } from '../shared/api/api-inventario-ti-proxy';
 import { environment } from '../environments/environment';
 import { provideNgxMask } from 'ngx-mask';
+import { LoadingScreenComponent } from '../shared/loading-screen/loading-screen.component';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { LoadingScreenService } from '../shared/loading-screen/loading-screen.service';
+import { AuthenticationService } from '../shared/api/auth/authentication.service';
+import { ToastService } from './toast/toast.service';
+import { MessageService } from 'primeng/api';
+import { CadastroEmpresaComponent } from './cadastro-empresa/cadastro-empresa.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    LoadingScreenComponent,
+    CadastroEmpresaComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +52,7 @@ import { provideNgxMask } from 'ngx-mask';
     InputGroupModule,
     InputGroupAddonModule,
     CardModule,
+    ProgressBarModule,
   ],
   providers: [
     provideNgxMask(),{
@@ -50,7 +60,11 @@ import { provideNgxMask } from 'ngx-mask';
       useFactory: () => {
         return environment.apiBaseUrl;
       }
-    }
+    },
+    LoadingScreenService,
+    AuthenticationService,
+    ToastService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })
