@@ -31,7 +31,7 @@ export class AccountServiceProxy {
      * @param body (optional) 
      * @return Success
      */
-    cadastrarEmpresa(body: ContaModel | undefined): Observable<string> {
+    cadastrarEmpresa(body: ContaModel | undefined): Observable<boolean> {
         let url_ = this.baseUrl + "/api/Account/CadastrarEmpresa";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -54,14 +54,14 @@ export class AccountServiceProxy {
                 try {
                     return this.processCadastrarEmpresa(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<string>;
+                    return _observableThrow(e) as any as Observable<boolean>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<string>;
+                return _observableThrow(response_) as any as Observable<boolean>;
         }));
     }
 
-    protected processCadastrarEmpresa(response: HttpResponseBase): Observable<string> {
+    protected processCadastrarEmpresa(response: HttpResponseBase): Observable<boolean> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :

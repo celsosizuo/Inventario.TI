@@ -19,7 +19,7 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { CardModule } from 'primeng/card';
 import { API_BASE_URL } from '../shared/api/api-inventario-ti-proxy';
 import { environment } from '../environments/environment';
-import { provideNgxMask } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { LoadingScreenComponent } from '../shared/loading-screen/loading-screen.component';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { LoadingScreenService } from '../shared/loading-screen/loading-screen.service';
@@ -27,6 +27,9 @@ import { AuthenticationService } from '../shared/api/auth/authentication.service
 import { ToastService } from './toast/toast.service';
 import { MessageService } from 'primeng/api';
 import { CadastroEmpresaComponent } from './cadastro-empresa/cadastro-empresa.component';
+import { InputMaskModule } from 'primeng/inputmask';
+import { MenubarModule } from 'primeng/menubar';
+
 
 @NgModule({
   declarations: [
@@ -53,6 +56,10 @@ import { CadastroEmpresaComponent } from './cadastro-empresa/cadastro-empresa.co
     InputGroupAddonModule,
     CardModule,
     ProgressBarModule,
+    InputMaskModule,
+    MenubarModule,
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
   providers: [
     provideNgxMask(),{

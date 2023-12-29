@@ -3,6 +3,7 @@ import { AutenticacaoServiceProxy, LoginModel } from '../../shared/api/api-inven
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { TipoMensagem } from '../toast/enumtipomensagem';
 import { AppBaseComponent } from '../../shared/app-base-component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,15 +12,17 @@ import { AppBaseComponent } from '../../shared/app-base-component';
   providers: [MessageService],
 })
 export class LoginComponent extends AppBaseComponent implements OnInit {
+  
   private autenticacaoService: AutenticacaoServiceProxy;
+  private router: Router;
+
   loginModel: LoginModel;
   usuario: string = '';
   senha: string = '';
 
   constructor(injector: Injector) {
     super(injector);
-
-    // this.toastService = injector.get(ToastService);
+    this.router = injector.get(Router);
     this.autenticacaoService = injector.get(AutenticacaoServiceProxy);
     this.loginModel = new LoginModel();
   }
@@ -43,7 +46,7 @@ export class LoginComponent extends AppBaseComponent implements OnInit {
       }
     }, (error) => {
       this.verifyError(error);
-    })
+    });
   }
 
   validarCampos() : boolean {
@@ -58,5 +61,9 @@ export class LoginComponent extends AppBaseComponent implements OnInit {
     }
 
     return true;
+  }
+
+  goToCadastroEmpresa() {
+    this.router.navigate(['cadastro-empresa']);
   }
 }

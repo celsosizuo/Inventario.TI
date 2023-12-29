@@ -34,9 +34,11 @@ namespace Inventario.TI.BackEnd.Services
 
         public async Task<bool> CriarConta(ContaModel conta)
         {
+
             var empresa = await _empresaService.Inserir(conta.Empresa) ?? throw new InvalidOperationException("Problema ao cadastrar a empresa");
             
             conta.Usuario.Empresa = empresa;
+            conta.Usuario.Role = "Admin";
 
             var usuario = await _usuarioService.Inserir(conta.Usuario) ?? throw new InvalidOperationException("Problema oa cadastrar o usuário");
             await EnviarEmail(empresa, usuario);

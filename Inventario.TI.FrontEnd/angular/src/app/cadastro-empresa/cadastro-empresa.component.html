@@ -1,0 +1,96 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 pt-5 text-center">
+            <p-card header="Dados da Empresa">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <p-inputGroup class="pt-3">
+                            <p-inputGroupAddon>
+                                <i class="pi pi-building"></i>
+                            </p-inputGroupAddon>
+                            <input pInputText placeholder="Razão Social" 
+                            [(ngModel)]="model.empresa.razaoSocial"
+                            [ngClass]="{'ng-invalid ng-dirty' : checaCampoValido('razaoSocial')}"
+                            (keyup)="teste('razaoSocial')"
+                            />
+                        </p-inputGroup>
+                        <small class="text-danger" *ngIf="checaCampoValido('razaoSocial')">Campo obrigatório.</small>
+                    </div>
+                    <div class="col-lg-4">
+                        <p-inputGroup class="pt-3">
+                            <p-inputGroupAddon>
+                                <i class="pi pi-pencil"></i>
+                            </p-inputGroupAddon>
+                            <input pInputText mask="00.000.000/0000-00" placeholder="CNPJ" 
+                            [(ngModel)]="model.empresa.cnpj"
+                            [ngClass]="{'ng-invalid ng-dirty' : checaCampoValido('cnpj')}"/>
+                        </p-inputGroup>
+                        <small class="text-danger" *ngIf="checaCampoValido('cnpj')">Campo obrigatório.</small>
+                    </div>
+                </div>
+            </p-card>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 pt-5 text-center">
+            <p-card header="Dados do Usuário" class="pt-1">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <p-inputGroup class="pt-3">
+                            <p-inputGroupAddon>
+                                <i class="pi pi-user"></i>
+                            </p-inputGroupAddon>
+                            <input pInputText placeholder="Nome Completo" 
+                            [(ngModel)]="model.usuario.nome"
+                            [ngClass]="{'ng-invalid ng-dirty' : checaCampoValido('nome')}"/>
+                        </p-inputGroup>
+                        <small class="text-danger" *ngIf="checaCampoValido('nome')">Campo obrigatório.</small>
+                    </div>
+                    <div class="col-lg-6">
+                        <p-inputGroup  class="pt-3">
+                            <p-inputGroupAddon>
+                                <i class="pi pi-at"></i>
+                            </p-inputGroupAddon>
+                            <input pInputText placeholder="E-mail" [(ngModel)]="model.usuario.login"
+                            [ngClass]="{'ng-invalid ng-dirty' : checaCampoValido('login')}"/>
+                        </p-inputGroup>
+                        <small class="text-danger" *ngIf="checaCampoValido('login')">Campo obrigatório.</small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <p-inputGroup class="pt-3">
+                            <p-inputGroupAddon>
+                                <i class="pi pi-lock"></i>
+                            </p-inputGroupAddon>
+                            <input pInputText type="password" placeholder="Senha" [(ngModel)]="senha"
+                            [ngClass]="{'ng-invalid ng-dirty' : checaCampoValido('senha') || checaCampoValido('senhaBranco')}"/>
+                        </p-inputGroup>
+                        <small class="text-danger" *ngIf="checaCampoValido('senha')">As senhas digitadas não conferem.</small>
+                        <small class="text-danger" *ngIf="checaCampoValido('senhabranco')">Campo obrigatório.</small>
+                    </div>
+                    <div class="col-lg-6">
+                        <p-inputGroup class="pt-3">
+                            <p-inputGroupAddon>
+                                <i class="pi pi-lock"></i>
+                            </p-inputGroupAddon>
+                            <input pInputText type="password" placeholder="Confirmar Senha" [(ngModel)]="confimarSenha" 
+                            [ngClass]="{'ng-invalid ng-dirty' : checaCampoValido('senha') || checaCampoValido('senhaBranco')}"/>
+                        </p-inputGroup>
+                        <small class="text-danger" *ngIf="checaCampoValido('senha')">As senhas digitadas não conferem.</small>
+                        <small class="text-danger" *ngIf="checaCampoValido('senhabranco')">Campo obrigatório.</small>
+                    </div>
+                </div>
+            </p-card>
+        </div>
+    </div>
+    <div class="row pt-4 pb-4">
+        <div class="col-lg-12 text-end">
+            <button type="button" pButton pRipple class="p-button-primary" (click)="cadastrarEmpresa()"
+            >Cadastrar</button>
+        </div>
+    </div>
+</div>
+<p-toast></p-toast>
+
+<!-- <pre>{{ this.model | json }}</pre> -->

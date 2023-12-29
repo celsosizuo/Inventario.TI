@@ -19,7 +19,7 @@ namespace Inventario.TI.BackEnd.Controllers
 
         [HttpPost("CadastrarEmpresa")]
         [AllowAnonymous]
-        public async Task<ActionResult<string>> CadastrarEmpresa(ContaModel model)
+        public async Task<ActionResult<bool>> CadastrarEmpresa(ContaModel model)
         {
             var retorno = await _accountService.CriarConta(model);
 
