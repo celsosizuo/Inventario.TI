@@ -66,6 +66,8 @@ builder.Services.AddCors(options =>
         .AllowAnyOrigin()
         .AllowAnyMethod()
         .AllowAnyHeader()
+        .AllowCredentials()
+        .WithOrigins(corsAllowed)
     );
 });
 
@@ -75,6 +77,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(
 builder.Services.ConfigureServices(builder.Configuration);
 
 var app = builder.Build();
+app.UseCors("CorsPolicy");
 
 
 // Configure the HTTP request pipeline.
@@ -86,7 +89,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors("CorsPolicy");
 app.UseRouting();
 
 app.UseAuthentication();
